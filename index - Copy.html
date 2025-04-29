@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        Schedule calculator
+    </title>
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="icon" href="../assets/favicon.ico">
+    <!-- fonts links -->
+    <!-- fonts from Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anta&family=Bebas+Neue&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="wrapper">
+        <header class="header">
+            <div class="header__logo-container">
+                <a class="homepage-link" href="https://www.pgcc.edu/" target="_blank">
+                    <img class="img__homepage-link" src="../assets/PGCC-logo.png" alt="PGCC Logo">
+                </a>
+            </div>
+            <div class="header__title-container">
+                <h1 class="header__title">Schedule Calculator</h1>
+            </div>
+        </header>
+        <!-- Help Button -->
+        <button class="help-button" id="help-button">?</button>
+
+        <!-- Help Modal (hidden by default) -->
+        <div class="help-modal" id="help-modal">
+            <div class="help-content">
+                <span class="close-help" id="close-help">&times;</span>
+                <h2>How to Use This Tool</h2>
+                <ol>
+                    <li><strong>Enter Credits</strong>: Input credit values for each instructional method you're using under the <strong>Intructional Methods</strong> section</li>
+                    <li><strong>Select Class Duration</strong>: Choose your course duration from the dropdown</li>
+                    <li><strong>Set Meetings</strong>: Specify how many times per week the class meets</li>
+                    <li><strong>Enter Start Time</strong>: Input when your class begins (e.g., 9:00 AM)</li>
+                    <li><strong>Calculate</strong>: Click "Do it" to see your schedule breakdown</li>
+                </ol>
+                <p><em>Note:</em> The calculator automatically adds break times for sessions longer than 2 hours.</p>
+            </div>
+        </div>
+        <main class="main__section"> 
+            <div class="calculator__wrapper">
+                <h2 class="methods-header">Instructional Methods</h2>
+                <form class="calculator-form">
+                    <div class="calculator-form__item">
+                        <label for="lecture-ratio-1_2">Lecture (Ratio 1:2)</label>
+                        <br>
+                        <input id="lecture-ratio-1_2" name="lecture-ratio-1_2" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="lab-standard-ratio-2_1">Lab (Standard ratio: 2:1)</label>
+                        <br>
+                        <input id="lab-standard-ratio-2_1" name="lab-standard-ratio-2_1" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="lab-ratio-3_1">Lab (Ratio 3:1)</label>
+                        <br>
+                        <input id="lab-ratio-3_1" name="lab-ratio-3_1" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="studio-ratio-2_1">Studio (Ratio 2:1)</label>
+                        <br>
+                        <input id="studio-ratio-2_1" name="studio-ratio-2_1" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="clinical-ratio-3_0">Clinical (Ratio 3:0)</label>
+                        <br>
+                        <input id="clinical-ratio-3_0" name="clinical-ratio-3_0" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="clinical-ratio-4_0">Clinical (Ratio 4:0)</label>
+                        <br>
+                        <input id="clinical-ratio-4_0" name="clinical-ratio-4_0" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="practicum-externship-ratio-3_0">Practicum/Externship (Ratio 3:0)</label>
+                        <br>
+                        <input id="practicum-externship-ratio-3_0" name="practicum-externship-ratio-3_0" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="fieldwork-ratio-3_0">Fieldwork (Ratio 3:0)</label>
+                        <br>
+                        <input id="fieldwork-ratio-3_0" name="fieldwork-ratio-3_0" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="internship-ratio-3_0">Internship (Ratio 3:0)</label>
+                        <br>
+                        <input id="internship-ratio-3_0" name="internship-ratio-3_0" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="private-lesson-ratio-1_1">Private Lesson (Ratio 1:1)</label>
+                        <br>
+                        <input id="private-lesson-ratio-1_1" name="private-lesson-ratio-1_1" type="number" min="0" placeholder="0">
+                    </div>
+                    <div class="calculator-form__item">
+                        <label for="recitation-ratio-1_2">Recitation (Ratio 1:2)</label>
+                        <br>
+                        <input id="recitation-ratio-1_2" name="recitation-ratio-1_2" type="number" min="0" placeholder="0">
+                    </div>
+                    <br class="br">
+                    <div class="time-header">
+                        <h2>Time Selection</h2>
+                    </div>
+                    <div class="calculator-form__item time-item">
+                        <label for="class-duration">Class Duration:</label>
+                        <br>
+                        <select class="class-duration__select" id="class-duration" name="class-duration">
+                            <option value="4 weeks">4 Weeks</option>
+                            <option value="5 weeks">5 Weeks</option>
+                            <option value="7 weeks">7 Weeks</option>
+                            <option value="10 weeks">10 Weeks</option>
+                            <option value="12 weeks">12 Weeks</option>
+                            <option value="15 weeks">15 Weeks</option>
+                        </select>
+                    </div>
+                    <div class="calculator-form__item time-item">
+                        <label for="meetings-per-week">Meetings Per Week</label>
+                        <br>
+                        <select class="meetings-per-week__select" id="meetings-per-week" name="meetings-per-week">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                            <option value="6">6</option>
+                        </select>
+                    </div>
+                    <div class="calculator-form__item time-item">
+                        <label for="start-time">Class Start Time</label>
+                        <br>
+                        <input class="start-time" id="start-time" name="start-time" type="time" required>
+                    </div>
+                    <div class="button-wrapper">
+                        <button class="calculate-button" id="calculate-button" name="calculate-button" type="submit">
+                            Do it
+                        </button>
+                        <button class="reset-button" id="reset-button" name="reset-button" type="reset">
+                            Reset
+                        </button>
+                    </div>
+                </form>
+                <h2 class="results-header" id="results-header">Results</h2>
+                <br>
+                <div class="text-area">
+                    <textarea class="schedule-output" name="schedule-output" id="schedule-output" rows="6" cols="50" readonly></textarea>
+                </div>
+                <div class="notes">
+                    <p>For total daily time, if not in a 5 min block, the time will need to be rounded up to the next 5 min block. Break times are included, if any. If the class is between 2-4 hours a 15 minute break is added, if between 4-6 hours 2 breaks are added, if over 6 hours 1 hour is added (2 breaks + 1 30 min meal time) for 50-minute clock hour clinical only.</p>
+                </div>
+            </div>
+        </main>
+        <footer class="footer__section">
+            Source Code Available in <a href="https://github.com/NextGen-Innovations0/NextGen-PGCC-Schedule-Calculator" target="_blank">GitHub</a>
+        </footer>
+        <script src="../JS/calculations.js"></script>
+    </div>
+</body>
+</html>
+<!-- Credits: The original code was entirely developed by: Orle Guerrero -->
