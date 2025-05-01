@@ -437,6 +437,7 @@ h2 {
 /* ------------FOOTER SECTION PROPERTIES--------------- */
 
 .footer__section {
+    width: 100vw;
     padding: 12px;
     text-align: center;
     background-color: #00285f;
