@@ -94,8 +94,7 @@ document.addEventListener('DOMContentLoaded', function() {
             resultsTextarea.value += `   ├─ Direct: ${directInstructionTimeStr}\n`;
             resultsTextarea.value += `   ├─ Out-of-Class: ${outOfClassStudentWorkStr}\n`;
             resultsTextarea.value += `   ├─ Combined: ${combinedInstructionalTimeStr}\n`;
-            resultsTextarea.value += `   ├─ Daily: ${formatTimeString(originalDuration)}\n`;
-            resultsTextarea.value += `   └─ Break Needed: ${breakNeeded}\n\n`;
+            resultsTextarea.value += `   └─ Daily: ${formatTimeString(originalDuration)}\n`;
         }
 
         if (totalDirectInstructionTime > 0 || totalOutOfClassStudentWork > 0) {
