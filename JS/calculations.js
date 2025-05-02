@@ -152,7 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function formatTimeString(hours) {
         const minutes = Math.round(hours * 60);
-        return `${hours.toFixed(2)} hours (${minutes} minutes)`;
+        return `${hours.toFixed(2)} hours (${minutes} min)`;
     }
 
     function formatTimeForDisplay(date) {
@@ -192,5 +192,116 @@ document.getElementById('reset-button')?.addEventListener('click', () => {
     setTimeout(() => window.scrollTo({ top: 0, behavior: 'smooth' }), 100);
 });
 
+
+// export button function
+
+document.getElementById('export-excel').addEventListener('click', function() {
+    // Load SheetJS library
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+    script.onload = function() {
+        try {
+            const resultsText = document.getElementById('schedule-output').value;
+            
+            // Create Excel data structure
+            const excelData = [
+            ["PGCC SCHEDULE CALCULATOR RESULTS"],
+            ["Generated: " + new Date().toLocaleString()],
+            [], // Empty row
+            ["INSTRUCTIONAL METHODS", "", "", "", "", ""],
+            ["Method", "Credits", "Direct (hrs)", "Out-of-Class (hrs)", "Combined (hrs)", "Daily (hrs)"]
+            ];
+    
+            // Parse methods and calculate totals
+            let totalCredits = 0;
+            let totalDirect = 0;
+            let totalOutOfClass = 0;
+            let totalCombined = 0;
+    
+            const methodBlocks = resultsText.split('→').slice(1);
+            methodBlocks.forEach(block => {
+            const lines = block.split('\n').filter(line => line.trim());
+            if (lines.length === 0) return;
+    
+            const method = lines[0].trim();
+            const credits = parseFloat(extractNumber(lines, "Credits")) || 0;
+            const direct = parseFloat(extractNumber(lines, "Direct")) || 0;
+            const outOfClass = parseFloat(extractNumber(lines, "Out-of-Class")) || 0;
+            const combined = parseFloat(extractNumber(lines, "Combined")) || 0;
+            const daily = parseFloat(extractNumber(lines, "Daily")) || 0;
+    
+            excelData.push([
+                method,
+                credits,
+                direct,
+                outOfClass,
+                combined,
+                daily
+            ]);
+    
+            // Sum totals
+            totalCredits += credits;
+            totalDirect += direct;
+            totalOutOfClass += outOfClass;
+            totalCombined += combined;
+            });
+    
+            // Add summary section
+            excelData.push([], ["SUMMARY"]);
+            excelData.push(["Total Credits", totalCredits]);
+            excelData.push(["Total Direct Instruction", totalDirect + " hours"]);
+            excelData.push(["Total Out-of-Class Work", totalOutOfClass + " hours"]);
+            excelData.push(["Total Combined Hours", totalCombined + " hours"]);
+    
+            // Add times section
+            function extractTimeValue(text, key) {
+                const match = new RegExp(key + ": ([^\n]+)").exec(text);
+                return match ? match[1].trim() : "";
+            }
+
+            excelData.push([], ["CLASS TIMES"]);
+            excelData.push(["Start Time", extractTimeValue(resultsText, "Start Time")]);
+            excelData.push(["End Time", extractTimeValue(resultsText, "End Time")]);
+    
+            // Create worksheet with formatting
+            const ws = XLSX.utils.aoa_to_sheet(excelData);
+            
+            // Set column widths
+            ws['!cols'] = [
+            {wch: 30}, {wch: 10}, {wch: 15}, 
+            {wch: 15}, {wch: 15}, {wch: 15}
+            ];
+            
+            // Merge title cells
+            ws['!merges'] = [
+            {s: {r: 0, c: 0}, e: {r: 0, c: 5}}, // Title
+            {s: {r: 1, c: 0}, e: {r: 1, c: 5}}, // Date
+            {s: {r: 3, c: 0}, e: {r: 3, c: 5}}  // "INSTRUCTIONAL METHODS" header
+            ];
+            
+            // Create and save workbook
+            const wb = XLSX.utils.book_new();
+            XLSX.utils.book_append_sheet(wb, ws, "Results");
+            XLSX.writeFile(wb, "PGCC_Schedule_Results.xlsx");
+            
+        } catch (error) {
+            alert("Export error: " + error.message);
+            console.error("Export failed:", error);
+        }
+        };
+        document.head.appendChild(script);
+    });
+    
+    // Helper function to extract numbers from text
+    function extractNumber(lines, key) {
+        for (const line of lines) {
+        if (line.includes(key + ":")) {
+            const numberMatch = line.match(/(\d+\.?\d*)/);
+            return numberMatch ? numberMatch[0] : "0";
+        }
+        }
+        return "0";
+
+    }
 /* Credits: Program Calculations functionalities and code development were implemented by Orle Guerrero with assistance from DeepSeek Chat (https://chat.deepseek.com)
 */
