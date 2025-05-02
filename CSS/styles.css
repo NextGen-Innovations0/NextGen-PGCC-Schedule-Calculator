@@ -400,17 +400,21 @@ h2 {
 
 /* Safari Button Fix */
 .calculate-button, 
-.reset-button {
+.reset-button,
+.export-button {
     -webkit-appearance: none; /* Disables default Safari styling */
     appearance: none; /* Future-proof */
     background-image: none; /* Removes Safari's invisible gradients */
+    color:#000;
 }
 
 /* Force text visibility in all states */
 .calculate-button:hover, 
 .reset-button:hover,
+.export-button:hover,
 .calculate-button:active, 
-.reset-button:active {
+.reset-button:active,
+.export-button: active {
     color: white !important;
     -webkit-text-fill-color: white !important;
 }
