@@ -146,7 +146,7 @@ div, header, footer, a, label, body{
 
 .main__section {
     background-color: #ffffff;
-    color: black;
+    color: #000;
     margin-top: 90px;
     width: 100%;
     min-height: 100vh;
@@ -164,7 +164,7 @@ div, header, footer, a, label, body{
 
 
 .calculator__wrapper {
-    color: black;
+    color: #000;
     width: 100%;
     min-height: 100vh;
     font-weight: lighter;
@@ -273,6 +273,7 @@ h2 {
 
 /* ------------CALCULATOR QUERIES PROPERTIES--------------- */
 
+
 @container calculator (max-width: 37.4rem) {
     .button-wrapper {
         margin: 30px;
@@ -289,9 +290,6 @@ h2 {
 }
 
 @container calculator (min-width: 37.5rem) {
-    .calculator-form {
-        grid-template-columns: 1fr 1fr 1fr;
-    }
 
     .time-header {
     grid-row-start: 5;
@@ -400,6 +398,40 @@ h2 {
     box-shadow: none;
 }
 
+/* Safari Button Fix */
+.calculate-button, 
+.reset-button {
+    -webkit-appearance: none; /* Disables default Safari styling */
+    appearance: none; /* Future-proof */
+    background-image: none; /* Removes Safari's invisible gradients */
+}
+
+/* Force text visibility in all states */
+.calculate-button:hover, 
+.reset-button:hover,
+.calculate-button:active, 
+.reset-button:active {
+    color: white !important;
+    -webkit-text-fill-color: white !important;
+}
+
+.export-button {
+    max-height: 40px;
+    margin: 10px;
+    padding: 8px 40px;
+    background-color: transparent;
+    border-radius: 5px;
+    letter-spacing: 2px;
+    border: 1px solid #4CAF50;
+    box-shadow: 2px 2px 4px #9f9a9a;
+    transition: background-color 0.2s;
+}
+
+.export-button:hover {
+    color: #fff;
+    background-color: #4CAF50;
+    box-shadow: none;
+}
 
 /* ------------TEXT AREA OUTPUT SECTION--------------- */
 
@@ -437,7 +469,7 @@ h2 {
 /* ------------FOOTER SECTION PROPERTIES--------------- */
 
 .footer__section {
-    width: 100vw;
+    width: 100%;
     padding: 12px;
     text-align: center;
     background-color: #00285f;
@@ -451,6 +483,132 @@ h2 {
 
 .footer__section a:visited {
     color: #fff;
+}
+
+/* ================================================ */
+/* MOBILE-ONLY FIXES (FOR SCREENS UNDER 600PX WIDE) */
+/* ================================================ */
+
+@media (max-width: 600px) {
+    /* 1. Reset viewport behavior */
+    body {
+        overflow-x: hidden;
+        touch-action: pan-y;
+        width: 100% !important;
+    }
+
+    /* 2. Header adjustments */
+    .header {
+        height: 70px;
+        padding: 0 10px;
+        justify-content: space-between;
+    }
+
+    .img__homepage-link {
+        height: 40px;
+        margin-right: 10px;
+    }
+
+    .header__title {
+        font-size: 1rem;
+        white-space: nowrap;
+        margin: 0 !important;
+    }
+
+    /* 3. Calculator form stacking */
+    .calculator-form {
+        grid-template-columns: 1fr !important;
+        gap: 12px;
+        padding: 10px;
+        width: 100vw;
+        margin: 0;
+    }
+
+    .calculator-form__item {
+        width: 92%;
+        margin: 0 auto;
+        padding: 15px 5px;
+    }
+    /* 4. Time inputs */
+    .time-header,
+    .time-item {
+        grid-column: 1 !important;
+        width: 92%;
+    }
+
+    /* 5. Buttons */
+    .button-wrapper {
+        flex-direction: column;
+        gap: 15px;
+        place-content: center;
+        justify-content: center;
+        margin: 40px 0 !important;
+        width: 100% !important;
+    }
+
+    .calculate-button,
+    .reset-button, .export-button {
+        width: 35%;
+        max-width: 220px;
+        margin: 0 !important;
+        margin: auto !important;
+    }
+
+    .schedule-output {
+        width: 94vw !important;        
+        max-width: 94vw !important;    
+        min-width: 94vw !important;    
+        margin-left: auto !important;  
+        margin-right: auto !important;
+        box-sizing: border-box;        
+        padding: 12px !important;      
+        transform: translateX(-1px);   
+    }
+    
+      /* Prevent horizontal scroll */
+    body, html {
+        overflow-x: hidden !important;
+        max-width: 100% !important;
+    }
+
+    /* 7. Help button (now fixed to bottom) */
+    .help-button {
+        position: fixed;
+        top: auto;
+        bottom: 20px;
+        right: 15px;
+        width: 44px;
+        height: 44px;
+        font-size: 18px;
+        background: #00285f;
+        border: 2px solid white;
+        box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+    }
+
+    /* 8. Hide non-essential elements */
+    .notes,
+    .br {
+        display: none;
+    }
+
+    /* 9. Input/select fields */
+    input[type="number"],
+    .class-duration__select,
+    .meetings-per-week__select,
+    .start-time {
+        width: 100% !important;
+        max-width: 140px;
+        margin: 8px auto !important;
+    }
+}
+  /* Extra small devices (e.g. iPhone 5/SE) */
+@media (max-width: 320px) {
+    .header__title {
+        font-size: 0.9rem;
+    }
+    .calculator-form__item {
+        width: 96%;
+    }
 }
 
 /* Credits: The original code was entirely developed by: Orle Guerrero */
