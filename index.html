@@ -2,24 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0">
     <title>
         Schedule calculator
     </title>
-    <link rel="stylesheet" href="./CSS/styles.css">
-    <link rel="icon" href="./assets/favicon.ico">
+    <link rel="stylesheet" href="../CSS/styles.css">
+    <link rel="icon" href="../assets/favicon.ico">
     <!-- fonts links -->
     <!-- fonts from Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Anta&family=Bebas+Neue&family=Istok+Web:ital,wght@0,400;0,700;1,400;1,700&family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
 </head>
 <body>
     <div class="wrapper">
         <header class="header">
             <div class="header__logo-container">
                 <a class="homepage-link" href="https://www.pgcc.edu/" target="_blank">
-                    <img class="img__homepage-link" src="./assets/PGCC-logo.png" alt="PGCC Logo">
+                    <img class="img__homepage-link" src="../assets/PGCC-logo.png" alt="PGCC Logo">
                 </a>
             </div>
             <div class="header__title-container">
@@ -143,6 +144,10 @@
                         <button class="reset-button" id="reset-button" name="reset-button" type="reset">
                             Reset
                         </button>
+                        <button id="export-excel" class="export-button"> 
+                            Export
+                        </button>
+
                     </div>
                 </form>
                 <h2 class="results-header" id="results-header">Results</h2>
@@ -158,7 +163,7 @@
         <footer class="footer__section">
             Source Code Available in <a href="https://github.com/NextGen-Innovations0/NextGen-PGCC-Schedule-Calculator" target="_blank">GitHub</a>
         </footer>
-        <script src="./JS/calculations.js"></script>
+        <script src="../JS/calculations.js"></script>
     </div>
 </body>
 </html>
